@@ -119,117 +119,88 @@
             <p>
                 The <strong>Three Months' Interest Penalty</strong> calculation is based on the remaining balance of the mortgage and the current mortgage interest rate, while the <strong>Interest Rate Differential (IRD)</strong> penalty calculation considers the remaining months in your mortgage term along with the posted interest rates.
             </p>
+
             <h3>What is the Posted Rate?</h3>
-            <p>The <strong>posted rate</strong> is the interest rate that lenders advertise for a mortgage. It is often higher than the rate that borrowers actually receive, especially for those with strong credit. The posted rate serves as a benchmark and is used to calculate penalties when breaking a mortgage contract early.</p>
-            <h3>Why the Posted Rate Matters</h3>
-            <p>It's crucial to understand the implications of the posted rates:</p>
+            <p>The <strong>posted rate</strong> is the interest rate that lenders advertise for a mortgage. It serves as a benchmark for borrowers to understand the potential cost of borrowing and is often higher than the rate that borrowers actually receive, especially for those with strong credit.</p>
+            <h4>Characteristics of the Posted Rate:</h4>
+            <ul>
+                <li>It is often higher than the actual rates borrowers may receive after negotiations or discounts.</li>
+                <li>Influenced by various factors, including market conditions, lender costs, risk assessments, and competition among lenders.</li>
+            </ul>
+
+            <h3>What is the Central Bank Rate?</h3>
+            <p>The <strong>central bank rate</strong> (also known as the benchmark rate, policy rate, or base rate) is the interest rate set by a country's central bank (such as the Federal Reserve in the U.S. or the Bank of Canada). This rate influences the overall cost of borrowing in the economy.</p>
+            <h4>Characteristics of the Central Bank Rate:</h4>
+            <ul>
+                <li>It serves as a tool for the central bank to control monetary policy, affecting inflation and economic growth.</li>
+                <li>Changes in the central bank rate have a ripple effect on other interest rates, including the posted rates offered by commercial banks and lenders.</li>
+                <li>A lower central bank rate typically encourages borrowing and spending, while a higher rate aims to cool down inflation by making borrowing more expensive.</li>
+            </ul>
+
+            <h3>Relationship Between Posted Rate and Central Bank Rate</h3>
+            <p>
+                The central bank rate serves as a primary influence on the posted rates offered by lenders. When the central bank raises or lowers its rate, lenders often adjust their posted rates accordingly. 
+                While both rates are affected by market conditions, the posted rate reflects additional factors like lender-specific costs and borrower risk.
+            </p>
+
+            <h3>Why is the Posted Rate on Signing Day Not Lower than the Current Posted Rate for New Term?</h3>
+            <p>The posted rate on the signing day is typically fixed and represents the interest rate at the time the mortgage agreement is made. Here are a few reasons why it is generally not lower than the current posted rate for a new term:</p>
             <ul>
                 <li>
-                    If the <strong>posted rate on your signing day</strong> is <em>higher</em> than the <strong>current posted rate for a new term</strong>, it could indicate a favorable scenario for the borrower. 
-                    You may have locked in a higher rate previously, leading to a lower IRD penalty, as you are essentially paying a penalty to break a more expensive mortgage.
+                    <strong>Market Dynamics:</strong> Over time, market conditions can change. If interest rates rise due to economic factors or inflation, the current posted rate may reflect these higher rates compared to the rate at the time of signing.
                 </li>
                 <li>
-                    Conversely, if the <strong>posted rate on your signing day</strong> is <em>lower</em> than the <strong>current posted rate for a new term</strong>, it indicates a less favorable scenario for the borrower. 
-                    This means the lender would not charge an IRD penalty since you would be breaking a mortgage to refinance at a lower rate.
+                    <strong>Lender Adjustments:</strong> Lenders regularly review and adjust their rates based on competition and market trends. If the current environment suggests higher rates, it is unlikely that the new term's rate will be lower than a previously fixed rate.
+                </li>
+                <li>
+                    <strong>Risk Factors:</strong> As lenders assess the risk associated with lending, they may increase rates based on market conditions. If the economy becomes less stable, lenders may raise their rates to mitigate risks.
+                </li>
+                <li>
+                    <strong>Inflationary Pressures:</strong> If inflation increases, lenders will typically raise their posted rates to ensure their returns on loans are not eroded by inflation, further ensuring that the posted rate on signing day is not lower than a new term.
                 </li>
             </ul>
+            <p>In summary, the posted rate on the signing day is usually a fixed rate determined by market conditions at that time. As market dynamics change, current rates reflect those shifts, generally leading to a scenario where the current posted rate is not lower than the previous rate on the signing day.</p>
         </div>
 
-        <h2>Three Months' Interest Penalty Calculator</h2>
-        <label for="mortgageRate">Current Mortgage Rate (%):</label>
-        <input type="number" id="mortgageRate" placeholder="e.g., 2.25" step="0.01" required>
+        <h2>Input Your Details</h2>
+        <label for="remainingBalance">Remaining Balance of Mortgage ($):</label>
+        <input type="number" id="remainingBalance" placeholder="Enter remaining balance" />
 
-        <label for="remainingBalance1">Remaining Balance of Mortgage ($):</label>
-        <input type="number" id="remainingBalance1" placeholder="e.g., 300000" required>
+        <label for="interestRate">Current Interest Rate (%):</label>
+        <input type="number" id="interestRate" placeholder="Enter current interest rate" />
 
-        <div class="result" id="threeMonthsResult"></div>
+        <label for="postedRate">Posted Rate on Signing Day (%):</label>
+        <input type="number" id="postedRate" placeholder="Enter posted rate on signing day" />
 
-        <h2>Interest Rate Differential (IRD) Penalty Calculator</h2>
-        <label for="postedRateOld">Posted Rate on Signing Day (%):</label>
-        <input type="number" id="postedRateOld" placeholder="e.g., 5.49" step="0.01" required>
+        <label for="currentPostedRate">Current Posted Rate for New Term (%):</label>
+        <input type="number" id="currentPostedRate" placeholder="Enter current posted rate for new term" />
 
-        <label for="postedRateNew">Current Posted Rate for New Term (%):</label>
-        <input type="number" id="postedRateNew" placeholder="e.g., 3.04" step="0.01" required>
+        <label for="remainingMonths">Remaining Months in Term:</label>
+        <input type="number" id="remainingMonths" placeholder="Enter remaining months in term" />
 
-        <label for="remainingBalance2">Remaining Balance of Mortgage ($):</label>
-        <input type="number" id="remainingBalance2" placeholder="e.g., 300000" required>
+        <button onclick="calculatePenalties()">Calculate Penalties</button>
 
-        <label for="remainingMonths">Remaining Months in Mortgage Term:</label>
-        <input type="number" id="remainingMonths" placeholder="e.g., 23" required>
-
-        <div class="result" id="irdResult"></div>
-
-        <h2>Potential Discount Area</h2>
-        <p>This section compares your penalties to see if there's a discount available when considering your prepayment options.</p>
-        <div class="result" id="discountResult"></div>
-
-        <h2>Comparison</h2>
-        <div class="result" id="comparisonResult"></div>
+        <div class="result" id="result"></div>
     </div>
 
     <script>
-        // Functions to calculate penalties and update results in real-time
-        const mortgageRateInput = document.getElementById('mortgageRate');
-        const remainingBalance1Input = document.getElementById('remainingBalance1');
-        const postedRateOldInput = document.getElementById('postedRateOld');
-        const postedRateNewInput = document.getElementById('postedRateNew');
-        const remainingBalance2Input = document.getElementById('remainingBalance2');
-        const remainingMonthsInput = document.getElementById('remainingMonths');
+        function calculatePenalties() {
+            const remainingBalance = parseFloat(document.getElementById('remainingBalance').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const postedRate = parseFloat(document.getElementById('postedRate').value);
+            const currentPostedRate = parseFloat(document.getElementById('currentPostedRate').value);
+            const remainingMonths = parseFloat(document.getElementById('remainingMonths').value);
 
-        let threeMonthsPenalty = 0;
-        let irdPenalty = 0;
+            const threeMonthsInterestPenalty = (remainingBalance * (interestRate / 100)) / 12 * 3;
+            const interestRateDifferentialPenalty = Math.max(0, (postedRate - currentPostedRate)) * remainingBalance * remainingMonths / 100;
 
-        function calculateThreeMonthsInterest() {
-            const mortgageRate = parseFloat(mortgageRateInput.value) / 100;
-            const balance = parseFloat(remainingBalance1Input.value);
-
-            if (!isNaN(mortgageRate) && !isNaN(balance)) {
-                threeMonthsPenalty = (balance * mortgageRate / 12) * 3;
-                document.getElementById('threeMonthsResult').textContent = `Three Months' Interest Penalty: $${threeMonthsPenalty.toFixed(2)}`;
-                updateComparison();
-            }
+            const resultText = `
+                <h3>Results</h3>
+                <p><strong>Three Months' Interest Penalty:</strong> $${threeMonthsInterestPenalty.toFixed(2)}</p>
+                <p><strong>Interest Rate Differential Penalty:</strong> $${interestRateDifferentialPenalty.toFixed(2)}</p>
+            `;
+            document.getElementById('result').innerHTML = resultText;
         }
-
-        function calculateIRD() {
-            const postedRateOld = parseFloat(postedRateOldInput.value) / 100;
-            const postedRateNew = parseFloat(postedRateNewInput.value) / 100;
-            const balance = parseFloat(remainingBalance2Input.value);
-            const months = parseInt(remainingMonthsInput.value, 10);
-
-            if (!isNaN(postedRateOld) && !isNaN(postedRateNew) && !isNaN(balance) && !isNaN(months)) {
-                let irDiff = postedRateOld - postedRateNew;
-                if (irDiff < 0) irDiff = 0; // No penalty if new rate is higher
-                irdPenalty = (balance * irDiff / 12) * months;
-                document.getElementById('irdResult').textContent = `Interest Rate Differential Penalty: $${irdPenalty.toFixed(2)}`;
-                updateComparison();
-            }
-        }
-
-        function updateComparison() {
-            const comparisonResult = document.getElementById('comparisonResult');
-            const discountResult = document.getElementById('discountResult');
-
-            if (threeMonthsPenalty > 0 || irdPenalty > 0) {
-                comparisonResult.textContent = `Choose the option that saves you the most: Three Months' Interest: $${threeMonthsPenalty.toFixed(2)}, IRD: $${irdPenalty.toFixed(2)}`;
-                
-                // Check if there's a discount available
-                const discountAvailable = (threeMonthsPenalty > irdPenalty) ? 
-                    `You might consider paying the IRD penalty instead, as it could be cheaper by $${(threeMonthsPenalty - irdPenalty).toFixed(2)}.` : 
-                    `You might consider paying the Three Months' Interest penalty instead, as it could be cheaper by $${(irdPenalty - threeMonthsPenalty).toFixed(2)}.`;
-                discountResult.textContent = discountAvailable;
-            } else {
-                comparisonResult.textContent = 'Please fill in all fields to see a comparison.';
-                discountResult.textContent = '';
-            }
-        }
-
-        // Event listeners for real-time calculations
-        mortgageRateInput.addEventListener('input', calculateThreeMonthsInterest);
-        remainingBalance1Input.addEventListener('input', calculateThreeMonthsInterest);
-        postedRateOldInput.addEventListener('input', calculateIRD);
-        postedRateNewInput.addEventListener('input', calculateIRD);
-        remainingBalance2Input.addEventListener('input', calculateIRD);
-        remainingMonthsInput.addEventListener('input', calculateIRD);
     </script>
 </body>
 </html>
