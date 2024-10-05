@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mortgage Prepayment Penalty Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Copilot:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4; /* Light gray background */
-            color: #333; /* Dark gray text */
+            font-family: 'Copilot', sans-serif;
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text */
             margin: 0;
             padding: 20px;
         }
@@ -18,15 +19,15 @@
             background-color: #ffffff; /* White background for content */
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: none; /* No shadow for black and white theme */
         }
         h1 {
-            color: #2c3e50;
+            color: #000000; /* Black heading */
             text-align: center;
         }
         h2 {
-            color: #333;
-            border-bottom: 2px solid #2c3e50; /* Underline subheadings */
+            color: #000000; /* Black subheading */
+            border-bottom: 2px solid #000000; /* Underline subheadings */
             padding-bottom: 5px;
         }
         label {
@@ -37,13 +38,13 @@
             padding: 10px;
             width: 100%;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #000000; /* Black border */
             border-radius: 4px;
         }
         button {
             padding: 10px;
-            background-color: #2c3e50; /* Dark blue background */
-            color: #fff; /* White text */
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text */
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -51,14 +52,15 @@
             transition: background-color 0.3s ease; /* Smooth transition */
         }
         button:hover {
-            background-color: #34495e; /* Darker blue on hover */
+            background-color: #444444; /* Dark gray on hover */
         }
         .result {
             margin-top: 20px;
             padding: 10px;
-            border: 1px solid #2c3e50;
+            border: 1px solid #000000; /* Black border */
             border-radius: 4px;
-            background-color: #ecf0f1; /* Light gray result background */
+            background-color: #f0f0f0; /* Light gray result background */
+            color: #000000; /* Black text */
         }
         .intro, .clarification {
             font-size: 1.1em; 
@@ -68,14 +70,14 @@
             margin: 10px 0 20px;
         }
         .instructions {
-            background-color: #f9f9f9; /* Light background for instructions */
-            border: 1px solid #ddd; /* Light border */
+            background-color: #ffffff; /* White background for instructions */
+            border: 1px solid #000000; /* Black border */
             padding: 10px;
             border-radius: 4px;
         }
         .clarification {
-            background-color: #e8f4f8; /* Light blue background for clarification */
-            border: 1px solid #b3e5fc; /* Light blue border */
+            background-color: #ffffff; /* White background for clarification */
+            border: 1px solid #000000; /* Black border */
             padding: 10px;
             border-radius: 4px;
         }
@@ -103,12 +105,20 @@
             <ul>
                 <li>
                     <strong>Three Months' Interest Penalty:</strong> 
-                    - You'll need the <em>current mortgage interest rate</em> (as a percentage) and the <em>remaining balance of your mortgage</em> (in dollars). 
+                    <ul>
+                        <li><em>Current mortgage interest rate</em> (as a percentage)</li>
+                        <li><em>Remaining balance of your mortgage</em> (in dollars)</li>
+                    </ul>
                     This information can usually be found in your mortgage statement or by contacting your lender.
                 </li>
                 <li>
                     <strong>Interest Rate Differential (IRD) Penalty:</strong>
-                    - You'll need the <em>posted rate on your signing day</em> (as a percentage), the <em>current posted rate for a new term</em> (also a percentage), the <em>remaining balance of your mortgage</em> (in dollars), and the <em>remaining months in your mortgage term</em>.
+                    <ul>
+                        <li><em>Posted rate on your signing day</em> (as a percentage)</li>
+                        <li><em>Current posted rate for a new term</em> (also a percentage)</li>
+                        <li><em>Remaining balance of your mortgage</em> (in dollars)</li>
+                        <li><em>Remaining months in your mortgage term</em></li>
+                    </ul>
                     This data can also be obtained from your mortgage documents or by checking with your lender.
                 </li>
             </ul>
@@ -116,20 +126,32 @@
 
         <div class="clarification">
             <h2>Clarification on Mortgage Terms</h2>
-            <p>
-                Understanding the difference between the <strong>mortgage term</strong> and the <strong>amortization period</strong> is important for calculating penalties:
-            </p>
+            <p>Understanding the difference between the <strong>mortgage term</strong> and the <strong>amortization period</strong> is important for calculating penalties:</p>
             <ul>
                 <li>
-                    <strong>Mortgage Term:</strong> This is the length of time until your mortgage contract expires, often ranging from 1 to 10 years. At the end of the term, you must either pay off the remaining balance or renew the mortgage.
+                    <strong>Mortgage Term:</strong> 
+                    - This is the length of time until your mortgage contract expires, often ranging from 1 to 10 years. At the end of the term, you must either pay off the remaining balance or renew the mortgage.
                 </li>
                 <li>
-                    <strong>Amortization Period:</strong> This is the total length of time over which your mortgage is scheduled to be paid off completely, typically ranging from 15 to 30 years. It includes all scheduled payments throughout the life of the mortgage.
+                    <strong>Amortization Period:</strong> 
+                    - This is the total length of time over which your mortgage is scheduled to be paid off completely, typically ranging from 15 to 30 years. It includes all scheduled payments throughout the life of the mortgage.
                 </li>
             </ul>
             <p>
                 The <strong>Three Months' Interest Penalty</strong> calculation is based on the remaining balance of the mortgage and the current mortgage interest rate, while the <strong>Interest Rate Differential (IRD)</strong> penalty calculation considers the remaining months in your mortgage term along with the posted interest rates.
             </p>
+            <h3>Why the Posted Rate Matters</h3>
+            <p>It's crucial to understand the implications of the posted rates:</p>
+            <ul>
+                <li>
+                    If the <strong>posted rate on your signing day</strong> is <em>higher</em> than the <strong>current posted rate for a new term</strong>, it could indicate a favorable scenario for the borrower. 
+                    - You may have locked in a higher rate previously, and thus, your IRD penalty could be lower, as you are essentially paying a penalty to break a more expensive mortgage.
+                </li>
+                <li>
+                    Conversely, if the <strong>posted rate on your signing day</strong> is <em>lower</em> than the <strong>current posted rate for a new term</strong>, it indicates a less favorable scenario for the borrower. 
+                    - This means the lender would not charge an IRD penalty since you would be breaking a mortgage to refinance at a lower rate.
+                </li>
+            </ul>
         </div>
 
         <h2>Three Months' Interest Penalty Calculator</h2>
@@ -167,55 +189,4 @@
         let threeMonthsPenalty = 0;
         let irdPenalty = 0;
 
-        function calculateThreeMonthsInterest() {
-            const mortgageRate = parseFloat(document.getElementById('mortgageRate').value) / 100;
-            const remainingBalance = parseFloat(document.getElementById('remainingBalance1').value);
-            const threeMonthsInterest = (remainingBalance * mortgageRate * 3).toFixed(2);
-            threeMonthsPenalty = parseFloat(threeMonthsInterest);
-            document.getElementById('threeMonthsResult').innerHTML = `
-                <h3>Three Months' Interest Penalty:</h3>
-                <p>$${threeMonthsInterest}</p>
-            `;
-        }
-
-        function calculateIRD() {
-            const postedRateOld = parseFloat(document.getElementById('postedRateOld').value) / 100;
-            const postedRateNew = parseFloat(document.getElementById('postedRateNew').value) / 100;
-            const remainingBalance = parseFloat(document.getElementById('remainingBalance2').value);
-            const remainingMonths = parseFloat(document.getElementById('remainingMonths').value);
-            
-            // Check if the old rate is greater than the new rate before calculating IRD
-            if (postedRateOld > postedRateNew) {
-                const interestDifferential = (postedRateOld - postedRateNew) * remainingBalance;
-                const irc = (interestDifferential * remainingMonths) / 12;
-                irdPenalty = irc.toFixed(2);
-                document.getElementById('irdResult').innerHTML = `
-                    <h3>Interest Rate Differential Penalty:</h3>
-                    <p>$${irdPenalty}</p>
-                `;
-            } else {
-                document.getElementById('irdResult').innerHTML = `
-                    <h3>Interest Rate Differential Penalty:</h3>
-                    <p>The posted rate on your signing day must be greater than the current posted rate for the calculation to apply.</p>
-                `;
-            }
-        }
-
-        function comparePenalties() {
-            if (threeMonthsPenalty > 0 && irdPenalty > 0) {
-                let comparisonMessage = `Comparing penalties:\n`;
-                comparisonMessage += `Three Months' Interest Penalty: $${threeMonthsPenalty}\n`;
-                comparisonMessage += `Interest Rate Differential Penalty: $${irdPenalty}\n`;
-                comparisonMessage += (threeMonthsPenalty < irdPenalty) ? 
-                    `Choosing Three Months' Interest Penalty will save you money.` : 
-                    `Choosing Interest Rate Differential Penalty will save you money.`;
-                document.getElementById('comparisonResult').innerHTML = comparisonMessage.replace(/\n/g, "<br>");
-            } else {
-                document.getElementById('comparisonResult').innerHTML = `
-                    <h3>Please calculate both penalties before comparing.</h3>
-                `;
-            }
-        }
-    </script>
-</body>
-</html>
+       
