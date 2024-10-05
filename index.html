@@ -83,9 +83,6 @@
     <label for="remainingBalance1">Remaining Balance of Mortgage ($):</label>
     <input type="number" id="remainingBalance1" placeholder="e.g., 300000" required>
 
-    <label for="remainingMonths1">Months Remaining in Mortgage Term:</label>
-    <input type="number" id="remainingMonths1" placeholder="e.g., 23" required>
-
     <button onclick="calculateThreeMonthsInterest()">Calculate 3-Months Interest Penalty</button>
     <div class="result" id="threeMonthsResult"></div>
 
@@ -98,6 +95,9 @@
 
     <label for="remainingBalance2">Remaining Balance of Mortgage ($):</label>
     <input type="number" id="remainingBalance2" placeholder="e.g., 300000" required>
+
+    <label for="remainingMonths">Remaining Months in Mortgage Term:</label>
+    <input type="number" id="remainingMonths" placeholder="e.g., 23" required>
 
     <button onclick="calculateIRD()">Calculate IRD Penalty</button>
     <div class="result" id="irdResult"></div>
@@ -113,7 +113,7 @@
         function calculateThreeMonthsInterest() {
             const mortgageRate = parseFloat(document.getElementById('mortgageRate').value) / 100;
             const remainingBalance = parseFloat(document.getElementById('remainingBalance1').value);
-            const threeMonthsInterest = (remainingBalance * mortgageRate * (3 / 12)).toFixed(2);
+            const threeMonthsInterest = (remainingBalance * mortgageRate * 3).toFixed(2);
             threeMonthsPenalty = parseFloat(threeMonthsInterest);
             document.getElementById('threeMonthsResult').innerHTML = `
                 <h3>Three Months' Interest Penalty:</h3>
@@ -125,7 +125,8 @@
             const postedRateOld = parseFloat(document.getElementById('postedRateOld').value) / 100;
             const postedRateNew = parseFloat(document.getElementById('postedRateNew').value) / 100;
             const remainingBalance = parseFloat(document.getElementById('remainingBalance2').value);
-            const interestDifferential = (postedRateOld - postedRateNew) * remainingBalance;
+            const remainingMonths = parseFloat(document.getElementById('remainingMonths').value);
+            const interestDifferential = (postedRateOld - postedRateNew) * remainingBalance * (remainingMonths / 12);
             const irPenalty = interestDifferential.toFixed(2);
             irdPenalty = parseFloat(irPenalty);
             document.getElementById('irdResult').innerHTML = `
