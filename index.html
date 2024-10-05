@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Differential Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interest Differential Calculator</h1>
+    <label for="principal">Principal Amount ($):</label>
+    <input type="number" id="principal" placeholder="Enter principal amount" required>
+
+    <label for="rate1">Higher Interest Rate (%):</label>
+    <input type="number" id="rate1" placeholder="Enter higher interest rate" required>
+
+    <label for="rate2">Lower Interest Rate (%):</label>
+    <input type="number" id="rate2" placeholder="Enter lower interest rate" required>
+
+    <label for="months">Number of Months:</label>
+    <input type="number" id="months" placeholder="Enter number of months" required>
+
+    <button onclick="calculateInterestDifferential()">Calculate</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateInterestDifferential() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate1 = parseFloat(document.getElementById('rate1').value) / 100 / 12;
+            const rate2 = parseFloat(document.getElementById('rate2').value) / 100 / 12;
+            const months = parseInt(document.getElementById('months').value);
+
+            const interestDifferential = principal * (rate1 - rate2) * months;
+
+            document.getElementById('result').innerText = 
+                `Interest Differential: $${interestDifferential.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
