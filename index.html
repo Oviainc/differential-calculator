@@ -19,6 +19,9 @@
             text-align: center;
             color: #333;
         }
+        label {
+            font-weight: bold;
+        }
         input, button {
             width: 100%;
             padding: 10px;
@@ -39,26 +42,63 @@
             margin-top: 20px;
             font-size: 18px;
             font-weight: bold;
+            color: #4CAF50;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        .example {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 10px;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <h1>Interest Differential Calculator</h1>
+    
     <label for="principal">Principal Amount ($):</label>
     <input type="number" id="principal" placeholder="Enter principal amount" required>
+    <div class="info">Enter the total amount of the mortgage or loan you want to analyze. For example, <strong>$120,000</strong>.</div>
 
     <label for="rate1">Higher Interest Rate (%):</label>
     <input type="number" id="rate1" placeholder="Enter higher interest rate" required>
+    <div class="info">Enter the higher interest rate of the two options you are comparing. For example, <strong>5%</strong>.</div>
 
     <label for="rate2">Lower Interest Rate (%):</label>
     <input type="number" id="rate2" placeholder="Enter lower interest rate" required>
+    <div class="info">Enter the lower interest rate of the two options you are comparing. For example, <strong>3%</strong>.</div>
 
     <label for="months">Number of Months:</label>
     <input type="number" id="months" placeholder="Enter number of months" required>
+    <div class="info">Enter the number of months you want to analyze the interest differential for. For example, <strong>3</strong> months.</div>
 
     <button onclick="calculateInterestDifferential()">Calculate</button>
 
     <div class="result" id="result"></div>
+
+    <div class="example">
+        <h3>Example Calculation</h3>
+        <p>Let's say you have the following values:</p>
+        <ul>
+            <li>Principal Amount: $120,000</li>
+            <li>Higher Interest Rate: 5%</li>
+            <li>Lower Interest Rate: 3%</li>
+            <li>Number of Months: 3</li>
+        </ul>
+        <p>The Interest Differential would be calculated as:</p>
+        <pre>
+        Interest Differential = Principal × (Higher Rate - Lower Rate) × (Months / 12)
+        = $120,000 × ((5%/12) - (3%/12)) × 3
+        = $120,000 × (0.00416667 - 0.0025) × 3
+        = $120,000 × 0.00166667 × 3
+        = $600
+        </pre>
+        <p>So, in this example, you would save $600 over 3 months by choosing the lower interest rate.</p>
+    </div>
 
     <script>
         function calculateInterestDifferential() {
