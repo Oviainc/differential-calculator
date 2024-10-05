@@ -15,18 +15,17 @@
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: auto;
             background-color: #ffffff; /* White background for content */
             padding: 20px;
             border-radius: 8px;
             box-shadow: none; /* No shadow for black and white theme */
         }
-        h1 {
-            color: #000000; /* Black heading */
+        h1, h2 {
+            color: #000000; /* Black headings */
             text-align: center;
         }
         h2 {
-            color: #000000; /* Black subheading */
             border-bottom: 2px solid #000000; /* Underline subheadings */
             padding-bottom: 5px;
         }
@@ -40,19 +39,6 @@
             margin-bottom: 10px;
             border: 1px solid #000000; /* Black border */
             border-radius: 4px;
-        }
-        button {
-            padding: 10px;
-            background-color: #000000; /* Black background */
-            color: #ffffff; /* White text */
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%; /* Full width for buttons */
-            transition: background-color 0.3s ease; /* Smooth transition */
-        }
-        button:hover {
-            background-color: #444444; /* Dark gray on hover */
         }
         .result {
             margin-top: 20px;
@@ -68,15 +54,10 @@
         }
         ul {
             margin: 10px 0 20px;
+            padding-left: 20px; /* Indent nested lists */
         }
-        .instructions {
-            background-color: #ffffff; /* White background for instructions */
-            border: 1px solid #000000; /* Black border */
-            padding: 10px;
-            border-radius: 4px;
-        }
-        .clarification {
-            background-color: #ffffff; /* White background for clarification */
+        .instructions, .clarification {
+            background-color: #ffffff; /* White background for instructions and clarification */
             border: 1px solid #000000; /* Black border */
             padding: 10px;
             border-radius: 4px;
@@ -129,12 +110,10 @@
             <p>Understanding the difference between the <strong>mortgage term</strong> and the <strong>amortization period</strong> is important for calculating penalties:</p>
             <ul>
                 <li>
-                    <strong>Mortgage Term:</strong> 
-                    - This is the length of time until your mortgage contract expires, often ranging from 1 to 10 years. At the end of the term, you must either pay off the remaining balance or renew the mortgage.
+                    <strong>Mortgage Term:</strong> This is the length of time until your mortgage contract expires, often ranging from 1 to 10 years. At the end of the term, you must either pay off the remaining balance or renew the mortgage.
                 </li>
                 <li>
-                    <strong>Amortization Period:</strong> 
-                    - This is the total length of time over which your mortgage is scheduled to be paid off completely, typically ranging from 15 to 30 years. It includes all scheduled payments throughout the life of the mortgage.
+                    <strong>Amortization Period:</strong> This is the total length of time over which your mortgage is scheduled to be paid off completely, typically ranging from 15 to 30 years. It includes all scheduled payments throughout the life of the mortgage.
                 </li>
             </ul>
             <p>
@@ -145,11 +124,11 @@
             <ul>
                 <li>
                     If the <strong>posted rate on your signing day</strong> is <em>higher</em> than the <strong>current posted rate for a new term</strong>, it could indicate a favorable scenario for the borrower. 
-                    - You may have locked in a higher rate previously, and thus, your IRD penalty could be lower, as you are essentially paying a penalty to break a more expensive mortgage.
+                    You may have locked in a higher rate previously, leading to a lower IRD penalty, as you are essentially paying a penalty to break a more expensive mortgage.
                 </li>
                 <li>
                     Conversely, if the <strong>posted rate on your signing day</strong> is <em>lower</em> than the <strong>current posted rate for a new term</strong>, it indicates a less favorable scenario for the borrower. 
-                    - This means the lender would not charge an IRD penalty since you would be breaking a mortgage to refinance at a lower rate.
+                    This means the lender would not charge an IRD penalty since you would be breaking a mortgage to refinance at a lower rate.
                 </li>
             </ul>
         </div>
@@ -161,7 +140,6 @@
         <label for="remainingBalance1">Remaining Balance of Mortgage ($):</label>
         <input type="number" id="remainingBalance1" placeholder="e.g., 300000" required>
 
-        <button onclick="calculateThreeMonthsInterest()">Calculate 3-Months Interest Penalty</button>
         <div class="result" id="threeMonthsResult"></div>
 
         <h2>Interest Rate Differential (IRD) Penalty Calculator</h2>
@@ -177,15 +155,65 @@
         <label for="remainingMonths">Remaining Months in Mortgage Term:</label>
         <input type="number" id="remainingMonths" placeholder="e.g., 23" required>
 
-        <button onclick="calculateIRD()">Calculate IRD Penalty</button>
         <div class="result" id="irdResult"></div>
 
         <h2>Comparison</h2>
-        <button onclick="comparePenalties()">Compare Penalties</button>
         <div class="result" id="comparisonResult"></div>
     </div>
 
     <script>
+        // Functions to calculate penalties and update results in real-time
+        const mortgageRateInput = document.getElementById('mortgageRate');
+        const remainingBalance1Input = document.getElementById('remainingBalance1');
+        const postedRateOldInput = document.getElementById('postedRateOld');
+        const postedRateNewInput = document.getElementById('postedRateNew');
+        const remainingBalance2Input = document.getElementById('remainingBalance2');
+        const remainingMonthsInput = document.getElementById('remainingMonths');
+
         let threeMonthsPenalty = 0;
         let irdPenalty = 0;
 
+        function calculateThreeMonthsInterest() {
+            const rate = parseFloat(mortgageRateInput.value) / 100;
+            const balance = parseFloat(remainingBalance1Input.value);
+            if (!isNaN(rate) && !isNaN(balance)) {
+                threeMonthsPenalty = balance * rate / 12 * 3;
+                document.getElementById('threeMonthsResult').textContent = `Three Months' Interest Penalty: $${threeMonthsPenalty.toFixed(2)}`;
+                updateComparison();
+            }
+        }
+
+        function calculateIRD() {
+            const postedRateOld = parseFloat(postedRateOldInput.value) / 100;
+            const postedRateNew = parseFloat(postedRateNewInput.value) / 100;
+            const balance = parseFloat(remainingBalance2Input.value);
+            const months = parseInt(remainingMonthsInput.value, 10);
+
+            if (!isNaN(postedRateOld) && !isNaN(postedRateNew) && !isNaN(balance) && !isNaN(months)) {
+                let irDiff = postedRateOld - postedRateNew;
+                if (irDiff < 0) irDiff = 0; // No penalty if new rate is higher
+                irdPenalty = (balance * irDiff / 12) * months;
+                document.getElementById('irdResult').textContent = `Interest Rate Differential Penalty: $${irdPenalty.toFixed(2)}`;
+                updateComparison();
+            }
+        }
+
+        function updateComparison() {
+            const comparisonResult = document.getElementById('comparisonResult');
+            if (threeMonthsPenalty > 0 || irdPenalty > 0) {
+                comparisonResult.textContent = `Choose the option that saves you the most: Three Months' Interest: $${threeMonthsPenalty.toFixed(2)}, IRD: $${irdPenalty.toFixed(2)}`;
+            } else {
+                comparisonResult.textContent = 'Please fill in all fields to see a comparison.';
+            }
+        }
+
+        // Event listeners for real-time calculations
+        mortgageRateInput.addEventListener('input', calculateThreeMonthsInterest);
+        remainingBalance1Input.addEventListener('input', calculateThreeMonthsInterest);
+        postedRateOldInput.addEventListener('input', calculateIRD);
+        postedRateNewInput.addEventListener('input', calculateIRD);
+        remainingBalance2Input.addEventListener('input', calculateIRD);
+        remainingMonthsInput.addEventListener('input', calculateIRD);
+    </script>
+</body>
+</html>
