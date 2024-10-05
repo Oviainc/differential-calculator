@@ -63,12 +63,37 @@
     <h1>Interest Differential Calculator</h1>
     
     <label for="principal">Principal Amount ($):</label>
-    <div class="info">Enter the total amount of the mortgage or loan you want to analyze. For example, $120,000.</div>
+    <div class="info">This is the total amount of your loan or mortgage. For example, if you have a mortgage of $200,000, enter <strong>200000</strong>.</div>
     <input type="number" id="principal" placeholder="Enter principal amount" required>
 
     <label for="rate1">Higher Interest Rate (%):</label>
-    <div class="info">Enter the interest rate for the more expensive loan option. For example, if the rate is 6%, enter <strong>6</strong>.</div>
+    <div class="info">This is the interest rate of the more expensive loan option. For example, if the higher rate is 6%, enter <strong>6</strong>.</div>
     <input type="number" id="rate1" placeholder="Enter higher interest rate" required>
 
     <label for="rate2">Lower Interest Rate (%):</label>
-    <div class="info">Enter the interest rate for the cheaper loan option. For example, if the rate is 4%, enter <str
+    <div class="info">This is the interest rate of the cheaper loan option. For example, if the lower rate is 4%, enter <strong>4</strong>.</div>
+    <input type="number" id="rate2" placeholder="Enter lower interest rate" required>
+
+    <label for="months">Number of Months:</label>
+    <div class="info">Enter the number of months for which you want to calculate the interest differential. For example, if you want to analyze over 6 months, enter <strong>6</strong>.</div>
+    <input type="number" id="months" placeholder="Enter number of months" required>
+
+    <button onclick="calculateInterestDifferential()">Calculate</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="example">
+        <h3>Example Calculation</h3>
+        <p>Here’s an example to help you understand how to use this calculator:</p>
+        <p>If you have:</p>
+        <ul>
+            <li>Principal Amount: $200,000</li>
+            <li>Higher Interest Rate: 6%</li>
+            <li>Lower Interest Rate: 4%</li>
+            <li>Number of Months: 6</li>
+        </ul>
+        <p>Your calculation will look like this:</p>
+        <pre>
+        Interest Differential = Principal × (Higher Rate - Lower Rate) × (Months / 12)
+        = $200,000 × ((6%/12) - (4%/12)) × 6
+        = $20
