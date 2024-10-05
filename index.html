@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMO Mortgage Prepayment Penalty Calculator</title>
+    <title>Mortgage Prepayment Penalty Calculator</title>
     <style>
         body {
             font-family: 'Arial', sans-serif; /* Use a clear and modern font */
@@ -33,11 +33,16 @@
         }
         button {
             padding: 10px;
-            background-color: #3498db;
-            color: white;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
             border: none;
             border-radius: 4px;
             cursor: pointer;
+        }
+        button:hover {
+            background-color: #fff; /* White background on hover */
+            color: #000; /* Black text on hover */
+            border: 1px solid #000; /* Border for hover effect */
         }
         .result {
             margin-top: 20px;
@@ -53,15 +58,17 @@
     </style>
 </head>
 <body>
-    <h1>BMO Mortgage Prepayment Penalty Calculator</h1>
+    <h1>Mortgage Prepayment Penalty Calculator</h1>
     
     <div class="intro">
         <h2>Introduction</h2>
         <p>
-            Welcome to the BMO Mortgage Prepayment Penalty Calculator! This tool is designed to help you understand the potential penalties associated with paying off your mortgage early or making additional payments. 
-            The calculator evaluates two primary methods for determining your prepayment penalty: 
-            <strong>Three Months' Interest</strong> and <strong>Interest Rate Differential (IRD)</strong>. 
-            By entering your mortgage details, you can quickly assess which method results in a higher penalty, empowering you to make informed financial decisions regarding your mortgage obligations.
+            Welcome to the Mortgage Prepayment Penalty Calculator! This tool is designed to help you protect your financial interests by allowing you to evaluate the potential penalties associated with paying off your mortgage early or making additional payments. 
+            It calculates two primary methods for determining your prepayment penalty: 
+            <strong>Three Months' Interest</strong> and <strong>Interest Rate Differential (IRD)</strong>.
+        </p>
+        <p>
+            The primary goal of this calculator is to ensure you don't end up paying a higher penalty than necessary. By comparing both penalty options, you can choose the more economical alternative, saving you money and making informed financial decisions regarding your mortgage obligations.
         </p>
         <p>
             Prepayment penalties exist to protect lenders from loss of interest income when loans are paid off ahead of schedule. Understanding how these penalties work can guide you in managing your mortgage effectively. 
@@ -69,50 +76,70 @@
         </p>
     </div>
 
+    <h2>Three Months' Interest Penalty Calculator</h2>
     <label for="mortgageRate">Current Mortgage Rate (%):</label>
     <input type="number" id="mortgageRate" placeholder="e.g., 2.25" step="0.01" required>
 
-    <label for="remainingBalance">Remaining Balance of Mortgage ($):</label>
-    <input type="number" id="remainingBalance" placeholder="e.g., 300000" required>
+    <label for="remainingBalance1">Remaining Balance of Mortgage ($):</label>
+    <input type="number" id="remainingBalance1" placeholder="e.g., 300000" required>
 
-    <label for="remainingMonths">Months Remaining in Mortgage Term:</label>
-    <input type="number" id="remainingMonths" placeholder="e.g., 23" required>
+    <label for="remainingMonths1">Months Remaining in Mortgage Term:</label>
+    <input type="number" id="remainingMonths1" placeholder="e.g., 23" required>
 
+    <button onclick="calculateThreeMonthsInterest()">Calculate 3-Months Interest Penalty</button>
+    <div class="result" id="threeMonthsResult"></div>
+
+    <h2>Interest Rate Differential (IRD) Penalty Calculator</h2>
     <label for="postedRateOld">Posted Rate on Signing Day (%):</label>
     <input type="number" id="postedRateOld" placeholder="e.g., 5.49" step="0.01" required>
 
     <label for="postedRateNew">Current Posted Rate for New Term (%):</label>
     <input type="number" id="postedRateNew" placeholder="e.g., 3.04" step="0.01" required>
 
-    <button onclick="calculatePenalty()">Calculate Penalty</button>
+    <label for="remainingBalance2">Remaining Balance of Mortgage ($):</label>
+    <input type="number" id="remainingBalance2" placeholder="e.g., 300000" required>
 
-    <div class="result" id="result"></div>
+    <button onclick="calculateIRD()">Calculate IRD Penalty</button>
+    <div class="result" id="irdResult"></div>
+
+    <h2>Comparison</h2>
+    <button onclick="comparePenalties()">Compare Penalties</button>
+    <div class="result" id="comparisonResult"></div>
 
     <script>
-        function calculatePenalty() {
-            // Get input values
+        let threeMonthsPenalty = 0;
+        let irdPenalty = 0;
+
+        function calculateThreeMonthsInterest() {
             const mortgageRate = parseFloat(document.getElementById('mortgageRate').value) / 100;
-            const remainingBalance = parseFloat(document.getElementById('remainingBalance').value);
-            const remainingMonths = parseInt(document.getElementById('remainingMonths').value);
+            const remainingBalance = parseFloat(document.getElementById('remainingBalance1').value);
+            const threeMonthsInterest = (remainingBalance * mortgageRate * (3 / 12)).toFixed(2);
+            threeMonthsPenalty = parseFloat(threeMonthsInterest);
+            document.getElementById('threeMonthsResult').innerHTML = `
+                <h3>Three Months' Interest Penalty:</h3>
+                <p>$${threeMonthsInterest}</p>
+            `;
+        }
+
+        function calculateIRD() {
             const postedRateOld = parseFloat(document.getElementById('postedRateOld').value) / 100;
             const postedRateNew = parseFloat(document.getElementById('postedRateNew').value) / 100;
-
-            // Method 1: Three Months' Interest
-            const threeMonthsInterest = (remainingBalance * mortgageRate * (3 / 12)).toFixed(2);
-
-            // Method 2: Interest Rate Differential (IRD)
+            const remainingBalance = parseFloat(document.getElementById('remainingBalance2').value);
             const interestDifferential = (postedRateOld - postedRateNew) * remainingBalance;
             const irPenalty = interestDifferential.toFixed(2);
+            irdPenalty = parseFloat(irPenalty);
+            document.getElementById('irdResult').innerHTML = `
+                <h3>Interest Rate Differential Penalty:</h3>
+                <p>$${irPenalty}</p>
+            `;
+        }
 
-            // Determine the greater penalty for fixed-rate mortgages
-            const prepaymentPenalty = Math.max(parseFloat(threeMonthsInterest), parseFloat(irPenalty)).toFixed(2);
-
-            // Display results
-            document.getElementById('result').innerHTML = `
-                <h2>Penalty Calculation Result:</h2>
-                <p>Three Months' Interest Penalty: $${threeMonthsInterest}</p>
-                <p>Interest Rate Differential Penalty: $${irPenalty}</p>
-                <p><strong>Total Prepayment Penalty: $${prepaymentPenalty}</strong></p>
+        function comparePenalties() {
+            const lowerPenalty = Math.min(threeMonthsPenalty, irdPenalty).toFixed(2);
+            const method = lowerPenalty === threeMonthsPenalty.toFixed(2) ? "Three Months' Interest" : "Interest Rate Differential (IRD)";
+            document.getElementById('comparisonResult').innerHTML = `
+                <h3>Comparison Result:</h3>
+                <p>The lower prepayment penalty is: $${lowerPenalty} using the ${method} method.</p>
             `;
         }
     </script>
