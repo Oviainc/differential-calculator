@@ -9,8 +9,8 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 20px;
-            background-color: #f2f2f2;
-            border-radius: 5px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
             max-width: 600px;
             margin: auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -21,6 +21,8 @@
         }
         label {
             font-weight: bold;
+            display: block;
+            margin-top: 10px;
         }
         input, button {
             width: 100%;
@@ -62,19 +64,19 @@
     
     <label for="principal">Principal Amount ($):</label>
     <input type="number" id="principal" placeholder="Enter principal amount" required>
-    <div class="info">Enter the total amount of the mortgage or loan you want to analyze. For example, <strong>$120,000</strong>.</div>
+    <div class="info">This is the total amount of your loan or mortgage. For example, if you have a mortgage of $200,000, enter <strong>200000</strong>.</div>
 
     <label for="rate1">Higher Interest Rate (%):</label>
     <input type="number" id="rate1" placeholder="Enter higher interest rate" required>
-    <div class="info">Enter the higher interest rate of the two options you are comparing. For example, <strong>5%</strong>.</div>
+    <div class="info">Enter the interest rate for the more expensive loan option. You can find this rate on your loan agreement or by checking with your lender. For example, if this rate is 6%, enter <strong>6</strong>.</div>
 
     <label for="rate2">Lower Interest Rate (%):</label>
     <input type="number" id="rate2" placeholder="Enter lower interest rate" required>
-    <div class="info">Enter the lower interest rate of the two options you are comparing. For example, <strong>3%</strong>.</div>
+    <div class="info">Enter the interest rate for the cheaper loan option. Again, check your loan documents or ask your lender. If this rate is 4%, enter <strong>4</strong>.</div>
 
     <label for="months">Number of Months:</label>
     <input type="number" id="months" placeholder="Enter number of months" required>
-    <div class="info">Enter the number of months you want to analyze the interest differential for. For example, <strong>3</strong> months.</div>
+    <div class="info">Enter how many months you want to calculate the interest differential for. For example, if you are comparing over 6 months, enter <strong>6</strong>.</div>
 
     <button onclick="calculateInterestDifferential()">Calculate</button>
 
@@ -82,22 +84,23 @@
 
     <div class="example">
         <h3>Example Calculation</h3>
-        <p>Let's say you have the following values:</p>
+        <p>Here’s an example to help you understand how to use this calculator:</p>
+        <p>If you have:</p>
         <ul>
-            <li>Principal Amount: $120,000</li>
-            <li>Higher Interest Rate: 5%</li>
-            <li>Lower Interest Rate: 3%</li>
-            <li>Number of Months: 3</li>
+            <li>Principal Amount: $200,000</li>
+            <li>Higher Interest Rate: 6%</li>
+            <li>Lower Interest Rate: 4%</li>
+            <li>Number of Months: 6</li>
         </ul>
-        <p>The Interest Differential would be calculated as:</p>
+        <p>Your calculation will look like this:</p>
         <pre>
         Interest Differential = Principal × (Higher Rate - Lower Rate) × (Months / 12)
-        = $120,000 × ((5%/12) - (3%/12)) × 3
-        = $120,000 × (0.00416667 - 0.0025) × 3
-        = $120,000 × 0.00166667 × 3
-        = $600
+        = $200,000 × ((6%/12) - (4%/12)) × 6
+        = $200,000 × (0.005 - 0.00333333) × 6
+        = $200,000 × 0.00166667 × 6
+        = $2,000
         </pre>
-        <p>So, in this example, you would save $600 over 3 months by choosing the lower interest rate.</p>
+        <p>This means you would save $2,000 over 6 months by choosing the lower interest rate.</p>
     </div>
 
     <script>
