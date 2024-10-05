@@ -6,7 +6,9 @@
     <title>BMO Mortgage Prepayment Penalty Calculator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif; /* Use a clear and modern font */
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text color */
             margin: 20px;
             padding: 20px;
             border: 1px solid #ccc;
@@ -14,6 +16,9 @@
         }
         h1 {
             color: #2c3e50;
+        }
+        h2 {
+            color: #333; /* Darker heading color for subheadings */
         }
         label {
             display: block;
@@ -41,10 +46,29 @@
             border-radius: 4px;
             background-color: #ecf0f1;
         }
+        .intro {
+            font-size: 1.1em; /* Slightly larger font for the introduction */
+            margin-bottom: 20px; /* Space between intro and calculator */
+        }
     </style>
 </head>
 <body>
     <h1>BMO Mortgage Prepayment Penalty Calculator</h1>
+    
+    <div class="intro">
+        <h2>Introduction</h2>
+        <p>
+            Welcome to the BMO Mortgage Prepayment Penalty Calculator! This tool is designed to help you understand the potential penalties associated with paying off your mortgage early or making additional payments. 
+            The calculator evaluates two primary methods for determining your prepayment penalty: 
+            <strong>Three Months' Interest</strong> and <strong>Interest Rate Differential (IRD)</strong>. 
+            By entering your mortgage details, you can quickly assess which method results in a higher penalty, empowering you to make informed financial decisions regarding your mortgage obligations.
+        </p>
+        <p>
+            Prepayment penalties exist to protect lenders from loss of interest income when loans are paid off ahead of schedule. Understanding how these penalties work can guide you in managing your mortgage effectively. 
+            Let’s get started!
+        </p>
+    </div>
+
     <label for="mortgageRate">Current Mortgage Rate (%):</label>
     <input type="number" id="mortgageRate" placeholder="e.g., 2.25" step="0.01" required>
 
