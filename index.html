@@ -119,6 +119,8 @@
             <p>
                 The <strong>Three Months' Interest Penalty</strong> calculation is based on the remaining balance of the mortgage and the current mortgage interest rate, while the <strong>Interest Rate Differential (IRD)</strong> penalty calculation considers the remaining months in your mortgage term along with the posted interest rates.
             </p>
+            <h3>What is the Posted Rate?</h3>
+            <p>The <strong>posted rate</strong> is the interest rate that lenders advertise for a mortgage. It is often higher than the rate that borrowers actually receive, especially for those with strong credit. The posted rate serves as a benchmark and is used to calculate penalties when breaking a mortgage contract early.</p>
             <h3>Why the Posted Rate Matters</h3>
             <p>It's crucial to understand the implications of the posted rates:</p>
             <ul>
@@ -157,6 +159,10 @@
 
         <div class="result" id="irdResult"></div>
 
+        <h2>Potential Discount Area</h2>
+        <p>This section compares your penalties to see if there's a discount available when considering your prepayment options.</p>
+        <div class="result" id="discountResult"></div>
+
         <h2>Comparison</h2>
         <div class="result" id="comparisonResult"></div>
     </div>
@@ -174,10 +180,11 @@
         let irdPenalty = 0;
 
         function calculateThreeMonthsInterest() {
-            const rate = parseFloat(mortgageRateInput.value) / 100;
+            const mortgageRate = parseFloat(mortgageRateInput.value) / 100;
             const balance = parseFloat(remainingBalance1Input.value);
-            if (!isNaN(rate) && !isNaN(balance)) {
-                threeMonthsPenalty = balance * rate / 12 * 3;
+
+            if (!isNaN(mortgageRate) && !isNaN(balance)) {
+                threeMonthsPenalty = (balance * mortgageRate / 12) * 3;
                 document.getElementById('threeMonthsResult').textContent = `Three Months' Interest Penalty: $${threeMonthsPenalty.toFixed(2)}`;
                 updateComparison();
             }
@@ -200,10 +207,19 @@
 
         function updateComparison() {
             const comparisonResult = document.getElementById('comparisonResult');
+            const discountResult = document.getElementById('discountResult');
+
             if (threeMonthsPenalty > 0 || irdPenalty > 0) {
                 comparisonResult.textContent = `Choose the option that saves you the most: Three Months' Interest: $${threeMonthsPenalty.toFixed(2)}, IRD: $${irdPenalty.toFixed(2)}`;
+                
+                // Check if there's a discount available
+                const discountAvailable = (threeMonthsPenalty > irdPenalty) ? 
+                    `You might consider paying the IRD penalty instead, as it could be cheaper by $${(threeMonthsPenalty - irdPenalty).toFixed(2)}.` : 
+                    `You might consider paying the Three Months' Interest penalty instead, as it could be cheaper by $${(irdPenalty - threeMonthsPenalty).toFixed(2)}.`;
+                discountResult.textContent = discountAvailable;
             } else {
                 comparisonResult.textContent = 'Please fill in all fields to see a comparison.';
+                discountResult.textContent = '';
             }
         }
 
