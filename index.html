@@ -3,119 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interest Differential Calculator</title>
+    <title>🌈 Fun Interest Differential Calculator! 🌈</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
             padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
+            background: linear-gradient(to right, #f0f8ff, #e6e6fa);
+            color: #333;
+            border-radius: 10px;
             max-width: 600px;
             margin: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
         }
+
         h1 {
             text-align: center;
-            color: #333;
+            color: #ff4500;
+            text-shadow: 2px 2px #ffa07a;
+            margin-bottom: 20px;
         }
+
+        h2 {
+            color: #2e8b57;
+        }
+
         label {
             font-weight: bold;
             display: block;
             margin-top: 10px;
         }
+
         input, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 2px solid #ffa07a;
+            border-radius: 5px;
+            transition: transform 0.2s;
         }
+
+        input:focus {
+            border-color: #ff6347;
+            outline: none;
+            transform: scale(1.02);
+        }
+
         button {
-            background-color: #4CAF50;
+            background-color: #ff6347;
             color: white;
             border: none;
             cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
         }
+
         button:hover {
-            background-color: #45a049;
+            background-color: #ff4500;
+            transform: scale(1.05);
         }
+
         .result {
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
-            color: #4CAF50;
+            color: #32cd32;
+            animation: bounce 1s infinite;
         }
+
         .info {
             margin-top: 5px;
             font-size: 14px;
             color: #555;
         }
+
         .example {
             background-color: #e7f3fe;
             border-left: 6px solid #2196F3;
             padding: 10px;
             margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .example:hover {
+            background-color: #d1e7dd;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <h1>Interest Differential Calculator</h1>
-    
+    <h1>🎉 Fun Interest Differential Calculator! 🎉</h1>
+
+    <h2>What is the Interest Differential Calculator? 🤔</h2>
+    <p>
+        The Interest Differential Calculator is a fun tool that helps you figure out how much money you could save or lose when comparing two different loan options. 
+        Imagine you want to borrow money for something special, like a new bike or video game console. Sometimes, different banks or lenders offer different interest rates, 
+        which means you could pay more or less over time. This calculator will help you see the difference in costs so you can make smart choices! 💡
+    </p>
+
     <label for="principal">Principal Amount ($):</label>
-    <div class="info">This is the total amount of your loan or mortgage. For example, if you have a mortgage of $200,000, enter <strong>200000</strong>.</div>
+    <div class="info">🔑 Enter the total amount of your loan or mortgage. For example, if you have a mortgage of $200,000, enter <strong>200000</strong>.</div>
     <input type="number" id="principal" placeholder="Enter principal amount" required>
 
     <label for="rate1">Higher Interest Rate (%):</label>
-    <div class="info">This is the interest rate of the more expensive loan option. For example, if the higher rate is 6%, enter <strong>6</strong>.</div>
+    <div class="info">💰 This is the interest rate of the more expensive loan option. For example, if the higher rate is 6%, enter <strong>6</strong>.</div>
     <input type="number" id="rate1" placeholder="Enter higher interest rate" required>
 
     <label for="rate2">Lower Interest Rate (%):</label>
-    <div class="info">This is the interest rate of the cheaper loan option. For example, if the lower rate is 4%, enter <strong>4</strong>.</div>
+    <div class="info">💸 This is the interest rate of the cheaper loan option. For example, if the lower rate is 4%, enter <strong>4</strong>.</div>
     <input type="number" id="rate2" placeholder="Enter lower interest rate" required>
 
     <label for="months">Number of Months:</label>
-    <div class="info">Enter the number of months for which you want to calculate the interest differential. For example, if you want to analyze over 6 months, enter <strong>6</strong>.</div>
+    <div class="info">🗓️ Enter the number of months for which you want to calculate the interest differential. For example, if you want to analyze over 6 months, enter <strong>6</strong>.</div>
     <input type="number" id="months" placeholder="Enter number of months" required>
 
-    <button onclick="calculateInterestDifferential()">Calculate</button>
+    <button onclick="calculateInterestDifferential()">Calculate 🎉</button>
 
     <div class="result" id="result"></div>
 
-    <div class="example">
-        <h3>Example Calculation</h3>
-        <p>Let’s make this fun! 🎉</p>
-        <p>Imagine you’re deciding between two loans:</p>
+    <div class="example" id="exampleSection" style="display: none;">
+        <h3>Example Calculation 🧮</h3>
+        <p>Let’s explore what you just entered! 🕵️‍♂️</p>
+        <p>If you entered:</p>
         <ul>
-            <li><strong>Principal Amount:</strong> $200,000</li>
-            <li><strong>Higher Interest Rate:</strong> 6%</li>
-            <li><strong>Lower Interest Rate:</strong> 4%</li>
-            <li><strong>Number of Months:</strong> 6</li>
+            <li><strong>Principal Amount:</strong> $<span id="examplePrincipal"></span></li>
+            <li><strong>Higher Interest Rate:</strong> <span id="exampleRate1"></span>%</li>
+            <li><strong>Lower Interest Rate:</strong> <span id="exampleRate2"></span>%</li>
+            <li><strong>Number of Months:</strong> <span id="exampleMonths"></span></li>
         </ul>
-        <p>Your calculation will look like this:</p>
-        <pre>
-        Interest Differential = Principal × (Higher Rate - Lower Rate) × (Months / 12)
-        = $200,000 × ((6%/12) - (4%/12)) × 6
-        = $200,000 × (0.005 - 0.00333333) × 6
-        = $200,000 × 0.00166667 × 6
-        = $2,000
-        </pre>
-        <p>So, you could save a whopping <strong>$2,000</strong> over those 6 months by choosing the lower interest rate! 💰</p>
+        <p>Then your calculation will look like this:</p>
+        <pre id="exampleCalculation"></pre>
+        <p>So, you could save a magical <strong>$<span id="exampleResult"></span></strong> over those <span id="exampleMonths"></span> months! ✨</p>
     </div>
 
     <script>
-        function calculateInterestDifferential() {
-            const principal = parseFloat(document.getElementById('principal').value);
-            const rate1 = parseFloat(document.getElementById('rate1').value) / 100 / 12;
-            const rate2 = parseFloat(document.getElementById('rate2').value) / 100 / 12;
-            const months = parseInt(document.getElementById('months').value);
-
-            const interestDifferential = principal * (rate1 - rate2) * months;
-
-            document.getElementById('result').innerText = 
-                `🎉 Interest Differential: $${interestDifferential.toFixed(2)} 🎉`;
-        }
-    </script>
-</body>
-</html>
-
+        function validateInput(principal, rate1, rate2, months) {
+            if (principal <= 0 || rate1 <= 0 || rate2 <= 0 || months <= 0) {
+                alert("Please enter positive values for all fields!");
+                return false;
+            }
+            if (rate1 <= rate2) {
+                alert("The higher interest rate must be greater than the l
