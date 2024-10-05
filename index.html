@@ -96,4 +96,25 @@
         <pre>
         Interest Differential = Principal × (Higher Rate - Lower Rate) × (Months / 12)
         = $200,000 × ((6%/12) - (4%/12)) × 6
-        = $20
+        = $200,000 × (0.005 - 0.00333333) × 6
+        = $200,000 × 0.00166667 × 6
+        = $2,000
+        </pre>
+        <p>This means you would save $2,000 over 6 months by choosing the lower interest rate.</p>
+    </div>
+
+    <script>
+        function calculateInterestDifferential() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate1 = parseFloat(document.getElementById('rate1').value) / 100 / 12;
+            const rate2 = parseFloat(document.getElementById('rate2').value) / 100 / 12;
+            const months = parseInt(document.getElementById('months').value);
+
+            const interestDifferential = principal * (rate1 - rate2) * months;
+
+            document.getElementById('result').innerText = 
+                `Interest Differential: $${interestDifferential.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
